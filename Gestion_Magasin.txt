@@ -1,0 +1,57 @@
+
+
+		--R1
+		
+		select * 
+		from Clients
+
+		--R2
+
+		select *
+		from Client
+		order by nom,prenom;
+
+		--R3
+
+		select *
+		from commande
+		where date_précise='2022-01-03';
+
+		--R4
+
+		select Nom ,Prenom, count(Id_Commande) AS total_Commande
+		from commande  inner join Client  on Client.Id_Client=commande.Id_Client
+		where Nom='Alami' and Prenom='Ahmad'
+		group by Nom,Prenom ;
+
+		--R5
+
+		select * 
+		from produit
+
+		--R6
+
+		select *
+		from produit
+		where prix>'50';
+
+		--R7
+
+		select *
+		from produit
+		where QTE=65;
+
+		--R8
+
+		select client.Id_Client ,Nom ,Prenom ,c.Adresse,date,d.Quantité
+		from clients  inner join commande c on client.Id_Clients=c.Id_Client
+			inner join détails_commande d on c.Id_Commande=d.Id_Commande
+		where Client.Nom='alami' and Client.Prenom='ahmad' and date='2022-01-04';
+
+		--R9 
+
+		select Nom,Prenom,co.Id_Commande, (p.prix_unitaire*d.quantité) as total_prix 
+		from Client c inner join commande co on c.Id_Client=co.Id_Client
+			inner join détails_commande d on co.Id_Commande=d.Id_Commande 
+			inner join produit p on d.Id_Produit=p.Id_Produit
+		where co.Id_Commande='A1';
